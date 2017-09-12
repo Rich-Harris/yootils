@@ -4,6 +4,10 @@
   "version": "0.0.1",
   "module": "yootils.es.js",
   "types": "src/index.d.ts",
+  "files": [
+    "yootils.es.js",
+    "src"
+  ],
   "devDependencies": {
     "@types/mocha": "^2.2.42",
     "@types/node": "^8.0.26",
