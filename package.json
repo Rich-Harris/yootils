@@ -2,6 +2,8 @@
   "name": "yootils",
   "description": "Stuff I often need",
   "version": "0.0.1",
+  "module": "yootils.es.js",
+  "types": "src/index.d.ts",
   "devDependencies": {
     "@types/mocha": "^2.2.42",
     "@types/node": "^8.0.26",
@@ -12,7 +14,9 @@
     "typescript": "^2.5.2"
   },
   "scripts": {
-    "build": "rollup -c && tsc --declaration src/index.ts",
-    "test": "mocha --opts mocha.opts"
+    "build-declarations": "tsc -d",
+    "build": "npm run build-declarations && rollup -c",
+    "test": "mocha --opts mocha.opts",
+    "pretest": "npm run build"
   }
 }
