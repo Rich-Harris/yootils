@@ -11,4 +11,11 @@ function clamp(num, min, max) {
     return num < min ? min : num > max ? max : num;
 }
 
-export { linear as linearScale, clamp };
+// https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+function commas(num) {
+    var parts = String(num).split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+}
+
+export { linear as linearScale, clamp, commas };
