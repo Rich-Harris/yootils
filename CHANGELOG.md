@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.3
+
+* Add `commas` helper
+
 ## 0.0.2
 
 * Generate declaration files automatically
