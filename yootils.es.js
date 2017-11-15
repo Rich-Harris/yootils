@@ -1,3 +1,38 @@
+function queue(max) {
+    if (max === void 0) { max = 4; }
+    var items = []; // TODO
+    var pending = 0;
+    function dequeue() {
+        if (pending >= max)
+            return;
+        if (items.length === 0)
+            return;
+        pending += 1;
+        var _a = items.shift(), fn = _a.fn, fulfil = _a.fulfil, reject = _a.reject;
+        var promise = fn();
+        try {
+            promise.then(fulfil, reject).then(function () {
+                pending -= 1;
+                dequeue();
+            });
+        }
+        catch (err) {
+            reject(err);
+            pending -= 1;
+            dequeue();
+        }
+        dequeue();
+    }
+    return {
+        add: function (fn) {
+            return new Promise(function (fulfil, reject) {
+                items.push({ fn: fn, fulfil: fulfil, reject: reject });
+                dequeue();
+            });
+        }
+    };
+}
+
 function linear(domain, range) {
     var d0 = domain[0];
     var r0 = range[0];
@@ -18,4 +53,4 @@ function commas(num) {
     return parts.join('.');
 }
 
-export { linear as linearScale, clamp, commas };
+export { queue, linear as linearScale, clamp, commas };

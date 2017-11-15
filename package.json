@@ -1,7 +1,7 @@
 {
   "name": "yootils",
   "description": "Stuff I often need",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "module": "yootils.es.js",
   "types": "src/index.d.ts",
   "files": [
@@ -14,13 +14,14 @@
     "mocha": "^3.5.0",
     "rollup": "^0.49.2",
     "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-virtual": "^1.0.1",
     "ts-node": "^3.3.0",
     "typescript": "^2.5.2"
   },
   "scripts": {
     "build-declarations": "tsc -d",
     "build": "npm run build-declarations && rollup -c",
-    "test": "mocha --opts mocha.opts",
+    "test": "mocha --opts mocha.opts && node check-treeshaking.js",
     "pretest": "npm run build"
   }
 }

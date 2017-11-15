@@ -2,6 +2,34 @@ import * as assert from 'assert';
 import * as yootils from '../src/index';
 
 describe('yootils', () => {
+	// async
+	describe('queue', () => {
+		// TODO more and better tests
+		it('queues tasks', async () => {
+			const queue = yootils.queue();
+
+			const letters = [];
+
+			letters.push(await queue.add(() => {
+				return Promise.resolve('a');
+			}));
+
+			letters.push(await queue.add(() => {
+				return Promise.resolve('b');
+			}));
+
+			letters.push(await queue.add(() => {
+				return Promise.resolve('c');
+			}));
+
+			await letters.push(await queue.add(() => {
+				return Promise.resolve('d');
+			}));
+
+			assert.deepEqual(letters, ['a', 'b', 'c', 'd']);
+		});
+	});
+
 	// scales
 	describe('linearScale', () => {
 		it('scales a number', () => {

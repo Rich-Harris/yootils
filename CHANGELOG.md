@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.4
+
+* Add `queue`
+
 ## 0.0.3
 
 * Add `commas` helper
