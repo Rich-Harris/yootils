@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.5
+
+* Add UMD build
+
 ## 0.0.4
 
 * Add `queue`
