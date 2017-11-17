@@ -37,6 +37,13 @@ describe('yootils', () => {
 			assert.equal(scale(15), 75);
 			assert.equal(scale(5), 25);
 		});
+
+		it('provides an inverse() method', () => {
+			const scale = yootils.linearScale([10, 20], [50, 100]);
+			const inverse = scale.inverse();
+			assert.equal(inverse(75), 15);
+			assert.equal(inverse(25), 5);
+		});
 	});
 
 	// number

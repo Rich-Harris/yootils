@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.6
+
+* Add `inverse()` method to scales
+
 ## 0.0.5
 
 * Add UMD build

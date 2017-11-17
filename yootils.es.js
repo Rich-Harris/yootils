@@ -37,9 +37,11 @@ function linear(domain, range) {
     var d0 = domain[0];
     var r0 = range[0];
     var m = (range[1] - r0) / (domain[1] - d0);
-    return function (num) {
+    return Object.assign(function (num) {
         return r0 + (num - d0) * m;
-    };
+    }, {
+        inverse: function () { return linear(range, domain); }
+    });
 }
 
 function clamp(num, min, max) {
