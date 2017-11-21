@@ -1,12 +1,21 @@
-function random(a, b) {
-    if (b === undefined)
-        return Math.random() * a;
-    return a + Math.random() * (b - a);
+function pickRandom(array) {
+    var i = ~~(Math.random() * array.length);
+    return array[i];
 }
 
-function pickRandom(array) {
-    var i = ~~(random(array.length));
-    return array[i];
+// http://bost.ocks.org/mike/shuffle/
+function shuffle(array) {
+    var m = array.length;
+    // While there remain elements to shuffle…
+    while (m > 0) {
+        // Pick a remaining element…
+        var i = Math.floor(Math.random() * m--);
+        // And swap it with the current element.
+        var t = array[m];
+        array[m] = array[i];
+        array[i] = t;
+    }
+    return array;
 }
 
 function queue(max) {
@@ -44,6 +53,16 @@ function queue(max) {
     };
 }
 
+function clamp(num, min, max) {
+    return num < min ? min : num > max ? max : num;
+}
+
+function random(a, b) {
+    if (b === undefined)
+        return Math.random() * a;
+    return a + Math.random() * (b - a);
+}
+
 function linear(domain, range) {
     var d0 = domain[0];
     var r0 = range[0];
@@ -55,10 +74,6 @@ function linear(domain, range) {
     });
 }
 
-function clamp(num, min, max) {
-    return num < min ? min : num > max ? max : num;
-}
-
 // https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
 function commas(num) {
     var parts = String(num).split('.');
@@ -66,4 +81,6 @@ function commas(num) {
     return parts.join('.');
 }
 
-export { pickRandom, queue, linear as linearScale, clamp, random, commas };
+// array
+
+export { pickRandom, shuffle, queue, clamp, random, linear as linearScale, commas };

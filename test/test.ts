@@ -18,6 +18,19 @@ describe('yootils', () => {
 		});
 	});
 
+	describe('shuffle', () => {
+		it('shuffles an array in place', () => {
+			const arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'];
+
+			const shuffled = yootils.shuffle(arr);
+
+			assert.strictEqual(shuffled, arr);
+
+			// this *could* happen, but would be vanishingly unlikely
+			assert.notDeepEqual(shuffled, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']);
+		});
+	});
+
 	// async
 	describe('queue', () => {
 		// TODO more and better tests
