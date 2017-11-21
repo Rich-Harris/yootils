@@ -1,3 +1,8 @@
+function pickRandom(array) {
+    var i = ~~(Math.random() * array.length);
+    return array[i];
+}
+
 function queue(max) {
     if (max === void 0) { max = 4; }
     var items = []; // TODO
@@ -55,4 +60,4 @@ function commas(num) {
     return parts.join('.');
 }
 
-export { queue, linear as linearScale, clamp, commas };
+export { pickRandom, queue, linear as linearScale, clamp, commas };

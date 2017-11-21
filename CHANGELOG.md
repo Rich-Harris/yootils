@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.7
+
+* Add `pickRandom` function
+
 ## 0.0.6
 
 * Add `inverse()` method to scales

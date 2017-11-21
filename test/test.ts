@@ -2,6 +2,22 @@ import * as assert from 'assert';
 import * as yootils from '../src/index';
 
 describe('yootils', () => {
+	// array
+	describe('pickRandom', () => {
+		it('picks an item from an array', () => {
+			const item = yootils.pickRandom(['a', 'b', 'c']);
+
+			assert.ok(item === 'a' || item === 'b' || item === 'c');
+		});
+
+		it('does not mutate the array', () => {
+			const array = ['a', 'b', 'c'];
+			const item = yootils.pickRandom(array);
+
+			assert.deepEqual(array, ['a', 'b', 'c']);
+		});
+	});
+
 	// async
 	describe('queue', () => {
 		// TODO more and better tests
