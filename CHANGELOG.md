@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.8
+
+* Add `random` function
+
 ## 0.0.7
 
 * Add `pickRandom` function

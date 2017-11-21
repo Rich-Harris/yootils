@@ -71,6 +71,20 @@ describe('yootils', () => {
 		});
 	});
 
+	describe('random', () => {
+		it('generates a random number', () => {
+			const n = yootils.random(10);
+			assert.ok(n >= 0);
+			assert.ok(n <= 10);
+		});
+
+		it('generates a random number between a and b', () => {
+			const n = yootils.random(50, 60);
+			assert.ok(n >= 50);
+			assert.ok(n <= 60);
+		});
+	});
+
 	// string
 	describe('commas', () => {
 		it('adds commas to a numnber', () => {

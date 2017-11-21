@@ -1,5 +1,11 @@
+function random(a, b) {
+    if (b === undefined)
+        return Math.random() * a;
+    return a + Math.random() * (b - a);
+}
+
 function pickRandom(array) {
-    var i = ~~(Math.random() * array.length);
+    var i = ~~(random(array.length));
     return array[i];
 }
 
@@ -60,4 +66,4 @@ function commas(num) {
     return parts.join('.');
 }
 
-export { pickRandom, queue, linear as linearScale, clamp, commas };
+export { pickRandom, queue, linear as linearScale, clamp, random, commas };
