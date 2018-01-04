@@ -100,15 +100,15 @@ describe('yootils', () => {
 
 	// string
 	describe('commas', () => {
-		it('adds commas to a numnber', () => {
+		it('adds commas to a number', () => {
 			assert.equal(yootils.commas(1234), '1,234');
 		});
 
-		it('adds commas to a large numnber', () => {
+		it('adds commas to a large number', () => {
 			assert.equal(yootils.commas(1234567890), '1,234,567,890');
 		});
 
-		it('adds commas to a numnber with decimal point', () => {
+		it('adds commas to a number with decimal point', () => {
 			assert.equal(yootils.commas(1234.5678), '1,234.5678');
 		});
 	});
