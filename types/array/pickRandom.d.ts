@@ -1,0 +1,1 @@
+export default function pickRandom(array: any[]): any;
