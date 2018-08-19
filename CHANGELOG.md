@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.11
+
+* Fix `pkg.files`
+
 ## 0.0.10
 
 * Admin

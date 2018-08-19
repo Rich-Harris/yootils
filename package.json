@@ -1,14 +1,14 @@
 {
   "name": "yootils",
   "description": "Stuff I often need",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "yootils.umd.js",
   "module": "yootils.es.js",
   "types": "types/index.d.ts",
   "files": [
     "yootils.es.js",
     "yootils.umd.js",
-    "src"
+    "types"
   ],
   "devDependencies": {
     "@types/mocha": "^5.2.5",
