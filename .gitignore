@@ -2,4 +2,5 @@
 node_modules
 *.js
 !yootils.es.js
+!yootils.umd.js
 *.d.ts
