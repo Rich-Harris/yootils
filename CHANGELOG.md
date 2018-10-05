@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.13
+
+* Fix `q.close()`
+
 ## 0.0.12
 
 * Add a `q.close()` method

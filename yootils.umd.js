@@ -28,7 +28,12 @@
         if (max === void 0) { max = 4; }
         var items = []; // TODO
         var pending = 0;
+        var closed = false;
+        var fulfil_closed;
         function dequeue() {
+            if (pending === 0 && items.length === 0) {
+                fulfil_closed();
+            }
             if (pending >= max)
                 return;
             if (items.length === 0)
@@ -51,9 +56,23 @@
         }
         return {
             add: function (fn) {
+                if (closed) {
+                    throw new Error("Cannot add to a closed queue");
+                }
                 return new Promise(function (fulfil, reject) {
                     items.push({ fn: fn, fulfil: fulfil, reject: reject });
                     dequeue();
+                });
+            },
+            close: function () {
+                closed = true;
+                return new Promise(function (fulfil, reject) {
+                    if (pending === 0) {
+                        fulfil();
+                    }
+                    else {
+                        fulfil_closed = fulfil;
+                    }
                 });
             }
         };

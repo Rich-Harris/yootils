@@ -1,7 +1,7 @@
 {
   "name": "yootils",
   "description": "Stuff I often need",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "yootils.umd.js",
   "module": "yootils.es.js",
   "types": "types/index.d.ts",

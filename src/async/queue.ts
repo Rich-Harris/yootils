@@ -17,11 +17,12 @@ export default function queue(max = 4) {
 	let fulfil_closed: () => void;
 
 	function dequeue() {
-		if (pending >= max) return;
-		if (items.length === 0) {
-			if (fulfil_closed) fulfil_closed();
-			return;
+		if (pending === 0 && items.length === 0) {
+			fulfil_closed();
 		}
+
+		if (pending >= max) return;
+		if (items.length === 0) return;
 
 		pending += 1;
 
