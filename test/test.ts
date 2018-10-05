@@ -57,6 +57,60 @@ describe('yootils', () => {
 
 			assert.deepEqual(letters, ['a', 'b', 'c', 'd']);
 		});
+
+		describe('queue.close', () => {
+			it('returns a promise that resolves once all items are completed', async () => {
+				type Deferred = {
+					fulfil: (value: any) => void;
+					reject: (error: Error) => void;
+					promise: Promise<any>;
+				};
+
+				const deferred = (): Deferred => {
+					let fulfil;
+					let reject;
+
+					const promise = new Promise((f, r) => {
+						fulfil = f;
+						reject = r;
+					});
+
+					return { promise, fulfil, reject };
+				};
+
+				const q = yootils.queue();
+
+				const deferreds: Deferred[] = [];
+				const values: number[] = [];
+
+				for (let i = 0; i < 10; i += 1) {
+					const d = deferred();
+					d.promise.then(value => {
+						values.push(value);
+					});
+
+					deferreds.push(d);
+					q.add(() => d.promise);
+				}
+
+				const promise = q.close();
+
+				deferreds.forEach((d, i) => d.fulfil(i * 2));
+
+				await promise;
+				assert.deepEqual(values, [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]);
+			});
+
+			it('throws if a task is subsequently added', () => {
+				const q = yootils.queue();
+
+				q.close();
+
+				assert.throws(() => {
+					q.add(() => Promise.resolve(42));
+				}, /Cannot add to a closed queue/);
+			});
+		});
 	});
 
 	// scales

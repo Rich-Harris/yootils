@@ -1,3 +1,9 @@
+type Deferred = {
+	fulfil: (value?: any) => void;
+	reject: (error?: Error) => void;
+	promise: Promise<any>;
+};
+
 export default function queue(max = 4) {
 	const items: Array<{
 		fn: () => Promise<any>;
@@ -7,9 +13,15 @@ export default function queue(max = 4) {
 
 	let pending = 0;
 
+	let closed = false;
+	let fulfil_closed: () => void;
+
 	function dequeue() {
 		if (pending >= max) return;
-		if (items.length === 0) return;
+		if (items.length === 0) {
+			if (fulfil_closed) fulfil_closed();
+			return;
+		}
 
 		pending += 1;
 
@@ -32,9 +44,25 @@ export default function queue(max = 4) {
 
 	return {
 		add(fn: () => Promise<any>) {
+			if (closed) {
+				throw new Error(`Cannot add to a closed queue`);
+			}
+
 			return new Promise((fulfil, reject) => {
 				items.push({ fn, fulfil, reject });
 				dequeue();
+			});
+		},
+
+		close() {
+			closed = true;
+
+			return new Promise((fulfil, reject) => {
+				if (pending === 0) {
+					fulfil();
+				} else {
+					fulfil_closed = fulfil;
+				}
 			});
 		}
 	};

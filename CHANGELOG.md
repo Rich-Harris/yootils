@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.12
+
+* Add a `q.close()` method
+
 ## 0.0.11
 
 * Fix `pkg.files`
