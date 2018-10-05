@@ -18,7 +18,7 @@ export default function queue(max = 4) {
 
 	function dequeue() {
 		if (pending === 0 && items.length === 0) {
-			fulfil_closed();
+			if (fulfil_closed) fulfil_closed();
 		}
 
 		if (pending >= max) return;
