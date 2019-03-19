@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.15
+
+* Add `createSprite` function
+
 ## 0.0.14
 
 * Fix another bug
