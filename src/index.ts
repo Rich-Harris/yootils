@@ -5,6 +5,9 @@ export { default as shuffle } from './array/shuffle';
 // async
 export { default as queue } from './async/queue';
 
+// canvas
+export { default as createSprite } from './canvas/sprite';
+
 // number
 export { default as clamp } from './number/clamp';
 export { default as random } from './number/random';
