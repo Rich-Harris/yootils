@@ -18,7 +18,10 @@ export default function queue(max = 4) {
 
 	function dequeue() {
 		if (pending === 0 && items.length === 0) {
-			if (fulfil_closed) fulfil_closed();
+			if (fulfil_closed) {
+				closed = true;
+				fulfil_closed();
+			}
 		}
 
 		if (pending >= max) return;
@@ -56,10 +59,9 @@ export default function queue(max = 4) {
 		},
 
 		close() {
-			closed = true;
-
 			return new Promise((fulfil, reject) => {
 				if (pending === 0) {
+					closed = true;
 					fulfil();
 				} else {
 					fulfil_closed = fulfil;

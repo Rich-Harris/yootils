@@ -26,7 +26,10 @@ function queue(max) {
     var fulfil_closed;
     function dequeue() {
         if (pending === 0 && items.length === 0) {
-            fulfil_closed();
+            if (fulfil_closed) {
+                closed = true;
+                fulfil_closed();
+            }
         }
         if (pending >= max)
             return;
@@ -59,9 +62,9 @@ function queue(max) {
             });
         },
         close: function () {
-            closed = true;
             return new Promise(function (fulfil, reject) {
                 if (pending === 0) {
+                    closed = true;
                     fulfil();
                 }
                 else {
