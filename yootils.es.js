@@ -26,7 +26,8 @@ function queue(max) {
     var fulfil_closed;
     function dequeue() {
         if (pending === 0 && items.length === 0) {
-            fulfil_closed();
+            if (fulfil_closed)
+                fulfil_closed();
         }
         if (pending >= max)
             return;
@@ -72,6 +73,15 @@ function queue(max) {
     };
 }
 
+function createSprite(width, height, fn) {
+    var canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext('2d');
+    fn(ctx, canvas);
+    return canvas;
+}
+
 function clamp(num, min, max) {
     return num < min ? min : num > max ? max : num;
 }
@@ -102,4 +112,4 @@ function commas(num) {
 
 // array
 
-export { pickRandom, shuffle, queue, clamp, random, linear as linearScale, commas };
+export { pickRandom, shuffle, queue, createSprite, clamp, random, linear as linearScale, commas };

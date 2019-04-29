@@ -32,7 +32,8 @@
         var fulfil_closed;
         function dequeue() {
             if (pending === 0 && items.length === 0) {
-                fulfil_closed();
+                if (fulfil_closed)
+                    fulfil_closed();
             }
             if (pending >= max)
                 return;
@@ -78,6 +79,15 @@
         };
     }
 
+    function createSprite(width, height, fn) {
+        var canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        var ctx = canvas.getContext('2d');
+        fn(ctx, canvas);
+        return canvas;
+    }
+
     function clamp(num, min, max) {
         return num < min ? min : num > max ? max : num;
     }
@@ -111,6 +121,7 @@
     exports.pickRandom = pickRandom;
     exports.shuffle = shuffle;
     exports.queue = queue;
+    exports.createSprite = createSprite;
     exports.clamp = clamp;
     exports.random = random;
     exports.linearScale = linear;
