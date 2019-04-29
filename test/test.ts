@@ -34,6 +34,33 @@ describe('yootils', () => {
 	// async
 	describe('queue', () => {
 		// TODO more and better tests
+		it('max parallel check', async () => {
+			const max = 4;
+			const q = yootils.queue(max);
+
+			const executing: number[] = [];
+
+			function sleep(delay: number): Promise<any> {
+				return new Promise(function(resolve) {
+					executing.push(1);
+					setTimeout(() => {
+						executing.push(-1);
+						resolve();
+					}, delay);
+				});
+			}
+
+			for (let i = 0; i < 10; i++) {
+				q.add(() => sleep(10));
+			}
+			await q.close();
+
+			let concurrent = 0;
+			while (concurrent += executing.shift()) {
+				assert.ok(concurrent <= max);
+			}
+
+		});
 		it('queues tasks', async () => {
 			const queue = yootils.queue();
 
@@ -59,6 +86,59 @@ describe('yootils', () => {
 		});
 
 		describe('queue.close', () => {
+
+			it('returns a promise that resolves and closes when all items are completed', async () => {
+				type Deferred = {
+					fulfil: (value: any) => void;
+					reject: (error: Error) => void;
+					promise: Promise<any>;
+				};
+
+				const deferred = (): Deferred => {
+					let fulfil;
+					let reject;
+
+					const promise = new Promise((f, r) => {
+						fulfil = f;
+						reject = r;
+					});
+
+					return { promise, fulfil, reject };
+				};
+
+				const q = yootils.queue();
+
+				const deferreds: Deferred[] = [];
+				const values: number[] = [];
+
+				for (let i = 0; i < 5; i += 1) {
+					const d = deferred();
+					d.promise.then(value => {
+						values.push(value);
+					});
+
+					deferreds.push(d);
+					q.add(() => d.promise);
+				}
+
+				const promise = q.close();
+
+				for (let i = 5; i < 10; i += 1) {
+					const d = deferred();
+					d.promise.then(value => {
+						values.push(value);
+					});
+
+					deferreds.push(d);
+					q.add(() => d.promise);
+				}
+
+				deferreds.forEach((d, i) => d.fulfil(i * 2));
+
+				await promise;
+				assert.deepEqual(values, [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]);
+			});
+
 			it('returns a promise that resolves once all items are completed', async () => {
 				type Deferred = {
 					fulfil: (value: any) => void;
@@ -101,10 +181,10 @@ describe('yootils', () => {
 				assert.deepEqual(values, [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]);
 			});
 
-			it('throws if a task is subsequently added', () => {
+			it('throws if a task is subsequently added', async () => {
 				const q = yootils.queue();
 
-				q.close();
+				await q.close();
 
 				assert.throws(() => {
 					q.add(() => Promise.resolve(42));
