@@ -53,14 +53,15 @@ describe('yootils', () => {
 			for (let i = 0; i < 10; i++) {
 				q.add(() => sleep(10));
 			}
-			await q.close();
+
+			q.close();
 
 			let concurrent = 0;
 			while (concurrent += executing.shift()) {
 				assert.ok(concurrent <= max);
 			}
-
 		});
+
 		it('queues tasks', async () => {
 			const queue = yootils.queue();
 
@@ -121,8 +122,6 @@ describe('yootils', () => {
 					q.add(() => d.promise);
 				}
 
-				const promise = q.close();
-
 				for (let i = 5; i < 10; i += 1) {
 					const d = deferred();
 					d.promise.then(value => {
@@ -132,6 +131,8 @@ describe('yootils', () => {
 					deferreds.push(d);
 					q.add(() => d.promise);
 				}
+
+				const promise = q.close();
 
 				deferreds.forEach((d, i) => d.fulfil(i * 2));
 
@@ -184,7 +185,7 @@ describe('yootils', () => {
 			it('throws if a task is subsequently added', async () => {
 				const q = yootils.queue();
 
-				await q.close();
+				q.close();
 
 				assert.throws(() => {
 					q.add(() => Promise.resolve(42));
