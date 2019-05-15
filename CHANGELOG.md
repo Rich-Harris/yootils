@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.16
+
+* Add `binarySearch` function
+
 ## 0.0.15
 
 * Add `createSprite` function

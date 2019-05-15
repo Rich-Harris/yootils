@@ -1,4 +1,5 @@
 // array
+export { default as binarySearch } from './array/binarySearch';
 export { default as pickRandom } from './array/pickRandom';
 export { default as shuffle } from './array/shuffle';
 
