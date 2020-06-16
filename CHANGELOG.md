@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.0.17
+
+* Add `sleep` function
+
 ## 0.0.16
 
 * Add `binarySearch` function
