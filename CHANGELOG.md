@@ -1,5 +1,10 @@
 # yootils changelog
 
+## 0.2.0
+
+* Rewrite in JS
+* Add `pkg.exports`
+
 ## 0.0.17
 
 * Add `sleep` function
