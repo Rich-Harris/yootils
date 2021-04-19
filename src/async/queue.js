@@ -1,20 +1,31 @@
-type Deferred = {
-	fulfil: (value?: any) => void;
-	reject: (error?: Error) => void;
-	promise: Promise<any>;
-};
+/**
+ * @typedef {{
+ *   fulfil: (value?: any) => void;
+ *   reject: (error?: Error) => void;
+ *   promise: Promise<any>;
+ * }} Deferred
+ *
+ * @typedef {{
+ *   fn: () => Promise<any>;
+ *   fulfil: (value: any) => void;
+ *   reject: (error: Error) => void;
+ * }} Item
+ */
 
+/**
+ * Create a queue for running promise-returning functions in sequence, with concurrency=`max`
+ * @param {number} max
+ */
 export default function queue(max = 4) {
-	const items: Array<{
-		fn: () => Promise<any>;
-		fulfil: (value: any) => void;
-		reject: (error: Error) => void;
-	}> = []; // TODO
+	/** @type {Item[]} */
+	const items = []; // TODO
 
 	let pending = 0;
 
 	let closed = false;
-	let fulfil_closed: () => void;
+
+	/** @type {(value: any) => void} */
+	let fulfil_closed;
 
 	function dequeue() {
 		if (pending === 0 && items.length === 0) {
@@ -34,7 +45,7 @@ export default function queue(max = 4) {
 				pending -= 1;
 				dequeue();
 			});
-		} catch(err) {
+		} catch (err) {
 			reject(err);
 			pending -= 1;
 			dequeue();
@@ -44,7 +55,8 @@ export default function queue(max = 4) {
 	}
 
 	return {
-		add(fn: () => Promise<any>) {
+		/** @param {() => Promise<any>} fn */
+		add(fn) {
 			if (closed) {
 				throw new Error(`Cannot add to a closed queue`);
 			}
@@ -65,6 +77,6 @@ export default function queue(max = 4) {
 					fulfil_closed = fulfil;
 				}
 			});
-		}
+		},
 	};
 }
