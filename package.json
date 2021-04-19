@@ -2,34 +2,38 @@
   "name": "yootils",
   "description": "Stuff I often need",
   "version": "0.0.17",
-  "main": "yootils.umd.js",
-  "module": "yootils.es.js",
+  "type": "module",
+  "main": "dist/yootils.cjs",
+  "module": "src/index.js",
+  "exports": {
+    "import": "./src/index.js",
+    "require": "./dist/yootils.cjs"
+  },
   "types": "types/index.d.ts",
   "files": [
-    "yootils.es.js",
-    "yootils.umd.js",
+    "src",
+    "dist",
     "types"
   ],
   "devDependencies": {
-    "@types/mocha": "^5.2.5",
-    "@types/node": "^10.7.1",
     "agadoo": "^1.0.0",
+    "esbuild": "^0.11.12",
     "mocha": "^5.2.0",
+    "prettier": "^2.2.1",
     "rollup": "^0.64.1",
-    "rollup-plugin-typescript": "^0.8.1",
-    "sander": "^0.6.0",
-    "tiny-glob": "^0.2.2",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.0.1"
+    "typescript": "^3.0.1",
+    "uvu": "^0.5.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rich-Harris/yootils.git"
   },
   "scripts": {
-    "build-declarations": "tsc -d && node scripts/move-declaration-files.js",
-    "build": "npm run build-declarations && rollup -c && agadoo",
-    "test": "mocha --opts mocha.opts",
-    "prepublishOnly": "npm run build && npm test"
+    "bundle": "esbuild --bundle src/index.js --format=cjs --outfile=dist/yootils.cjs",
+    "types": "typescript src/**/*.js --declaration --allowJs --emitDeclarationOnly --outDir types",
+    "build": "npm run types && npm run bundle && agadoo",
+    "format": "prettier -w src",
+    "test": "uvu src \".\\.spec\\.js\"",
+    "prepublishOnly": "npm test && npm run build"
   }
 }

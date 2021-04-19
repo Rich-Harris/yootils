@@ -1,27 +1,28 @@
 /**
- * @typedef {(item: any, needle: number) => number} Comparator
+ * @template T
+ * @typedef {(item: T, needle?: number) => number} Comparator<T=any>
  */
 
-/** @type {Comparator} */
+/** @type {Comparator<any>} */
 const default_sort = (item, needle) => item - needle;
 
 /**
  * @template T
  * @param {T[]} array
  * @param {number} search
- * @param {(item: T) => number} fn
+ * @param {Comparator<T>} [fn]
  */
 export default function binarySearch(
 	array,
 	search,
-	fn
+	fn = default_sort
 ) {
 	let low = 0;
 	let high = array.length - 1;
 
-	/** @type {Comparator} */
+	/** @type {Comparator<T>} */
 	const sort = fn.length === 1
-		? (item, needle) => fn(item) - search
+		? /** @type {Comparator<T>} */ ((item, needle) => fn(item) - search)
 		: fn;
 
 	while (low <= high) {

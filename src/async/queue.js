@@ -13,7 +13,7 @@
  */
 
 /**
- * Create a queue for running promise-returning functions in sequence, with concurrency=max
+ * Create a queue for running promise-returning functions in sequence, with concurrency=`max`
  * @param {number} max
  */
 export default function queue(max = 4) {
