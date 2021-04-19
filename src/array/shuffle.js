@@ -1,5 +1,7 @@
 // http://bost.ocks.org/mike/shuffle/
-export default function shuffle(array: any[]) {
+
+/** @param {any[]} array */
+export default function shuffle(array) {
 	let m = array.length;
 
 	// While there remain elements to shuffle…

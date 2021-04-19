@@ -4,6 +4,30 @@
     (factory((global.yootils = {})));
 }(this, (function (exports) { 'use strict';
 
+    var default_sort = function (item, needle) { return item - needle; };
+    function binarySearch(array, search, fn) {
+        if (fn === void 0) { fn = default_sort; }
+        var low = 0;
+        var high = array.length - 1;
+        var sort = fn.length === 1
+            ? function (item, needle) { return fn(item) - search; }
+            : fn;
+        while (low <= high) {
+            var i = (high + low) >> 1;
+            var d = sort(array[i], search);
+            if (d < 0) {
+                low = i + 1;
+            }
+            else if (d > 0) {
+                high = i - 1;
+            }
+            else {
+                return i;
+            }
+        }
+        return -low - 1;
+    }
+
     function pickRandom(array) {
         var i = ~~(Math.random() * array.length);
         return array[i];
@@ -79,6 +103,12 @@
         };
     }
 
+    function sleep(ms) {
+        return new Promise(function (fulfil) {
+            setTimeout(fulfil, ms);
+        });
+    }
+
     function createSprite(width, height, fn) {
         var canvas = document.createElement('canvas');
         canvas.width = width;
@@ -118,9 +148,11 @@
 
     // array
 
+    exports.binarySearch = binarySearch;
     exports.pickRandom = pickRandom;
     exports.shuffle = shuffle;
     exports.queue = queue;
+    exports.sleep = sleep;
     exports.createSprite = createSprite;
     exports.clamp = clamp;
     exports.random = random;

@@ -1,6 +1,8 @@
+export { default as binarySearch } from './array/binarySearch';
 export { default as pickRandom } from './array/pickRandom';
 export { default as shuffle } from './array/shuffle';
 export { default as queue } from './async/queue';
+export { default as sleep } from './async/sleep';
 export { default as createSprite } from './canvas/sprite';
 export { default as clamp } from './number/clamp';
 export { default as random } from './number/random';

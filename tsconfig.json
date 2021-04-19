@@ -1,10 +1,15 @@
 {
     "compilerOptions": {
+        "allowJs": true,
+        "checkJs": true,
         "noImplicitAny": true,
         "diagnostics": true,
         "noImplicitThis": true,
         "noEmitOnError": true,
-        "lib": ["es5", "es6", "dom"]
+        "lib": ["es5", "es6", "dom"],
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "declarationDir": "types"
     },
     "target": "ES5",
     "module": "ES6",
