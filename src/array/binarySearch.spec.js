@@ -18,7 +18,7 @@ test('supports custom sort function', () => {
 		{ value: 2 },
 		{ value: 3 },
 		{ value: 4 },
-		{ value: 5 }
+		{ value: 5 },
 	];
 
 	const index = binarySearch(values, 4, (item) => item.value);
@@ -32,10 +32,10 @@ test('supports custom sort function with single argument', () => {
 		{ value: 2 },
 		{ value: 3 },
 		{ value: 4 },
-		{ value: 5 }
+		{ value: 5 },
 	];
 
-	const index = binarySearch(values, 3.5, item => item.value);
+	const index = binarySearch(values, 3.5, (item) => item.value);
 
 	assert.equal(index, ~3);
 });

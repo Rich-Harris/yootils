@@ -12,18 +12,15 @@ const default_sort = (item, needle) => item - needle;
  * @param {number} search
  * @param {Comparator<T>} [fn]
  */
-export default function binarySearch(
-	array,
-	search,
-	fn = default_sort
-) {
+export default function binarySearch(array, search, fn = default_sort) {
 	let low = 0;
 	let high = array.length - 1;
 
 	/** @type {Comparator<T>} */
-	const sort = fn.length === 1
-		? /** @type {Comparator<T>} */ ((item, needle) => fn(item) - search)
-		: fn;
+	const sort =
+		fn.length === 1
+			? /** @type {Comparator<T>} */ ((item, needle) => fn(item) - search)
+			: fn;
 
 	while (low <= high) {
 		const i = (high + low) >> 1;
@@ -32,7 +29,7 @@ export default function binarySearch(
 
 		if (d < 0) {
 			low = i + 1;
-		} else if(d > 0) {
+		} else if (d > 0) {
 			high = i - 1;
 		} else {
 			return i;

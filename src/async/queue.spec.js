@@ -16,7 +16,7 @@ test('max parallel check', async () => {
 
 	/** @param {number} delay */
 	function sleep(delay) {
-		return new Promise(function(resolve) {
+		return new Promise(function (resolve) {
 			executing.push(1);
 			setTimeout(() => {
 				executing.push(-1);
@@ -32,7 +32,7 @@ test('max parallel check', async () => {
 	q.close();
 
 	let concurrent = 0;
-	while (concurrent += executing.shift()) {
+	while ((concurrent += executing.shift())) {
 		assert.ok(concurrent <= max);
 	}
 });
@@ -42,21 +42,29 @@ test('queues tasks', async () => {
 
 	const letters = [];
 
-	letters.push(await q.add(() => {
-		return Promise.resolve('a');
-	}));
+	letters.push(
+		await q.add(() => {
+			return Promise.resolve('a');
+		})
+	);
 
-	letters.push(await q.add(() => {
-		return Promise.resolve('b');
-	}));
+	letters.push(
+		await q.add(() => {
+			return Promise.resolve('b');
+		})
+	);
 
-	letters.push(await q.add(() => {
-		return Promise.resolve('c');
-	}));
+	letters.push(
+		await q.add(() => {
+			return Promise.resolve('c');
+		})
+	);
 
-	await letters.push(await q.add(() => {
-		return Promise.resolve('d');
-	}));
+	await letters.push(
+		await q.add(() => {
+			return Promise.resolve('d');
+		})
+	);
 
 	assert.equal(letters, ['a', 'b', 'c', 'd']);
 });
@@ -84,7 +92,7 @@ test('queue.close returns a promise that resolves and closes when all items are 
 
 	for (let i = 0; i < 5; i += 1) {
 		const d = deferred();
-		d.promise.then(value => {
+		d.promise.then((value) => {
 			values.push(value);
 		});
 
@@ -94,7 +102,7 @@ test('queue.close returns a promise that resolves and closes when all items are 
 
 	for (let i = 5; i < 10; i += 1) {
 		const d = deferred();
-		d.promise.then(value => {
+		d.promise.then((value) => {
 			values.push(value);
 		});
 
@@ -133,7 +141,7 @@ test('queue.close returns a promise that resolves once all items are completed',
 
 	for (let i = 0; i < 10; i += 1) {
 		const d = deferred();
-		d.promise.then(value => {
+		d.promise.then((value) => {
 			values.push(value);
 		});
 

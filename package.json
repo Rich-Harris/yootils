@@ -31,7 +31,7 @@
   "scripts": {
     "bundle": "esbuild --bundle src/index.js --format=cjs --outfile=dist/yootils.cjs",
     "types": "typescript src/**/*.js --declaration --allowJs --emitDeclarationOnly --outDir types",
-    "build": "npm run types && npm run bundle && agadoo",
+    "build": "npm run types && npm run bundle && agadoo && npm run format",
     "format": "prettier -w src",
     "test": "uvu src \".\\.spec\\.js\"",
     "prepublishOnly": "npm test && npm run build"

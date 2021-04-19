@@ -10,7 +10,20 @@ test('shuffles an array in place', () => {
 	assert.is(shuffled, arr);
 
 	// this *could* happen, but would be vanishingly unlikely
-	assert.not.equal(shuffled, ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']);
+	assert.not.equal(shuffled, [
+		'a',
+		'b',
+		'c',
+		'd',
+		'e',
+		'f',
+		'g',
+		'h',
+		'i',
+		'j',
+		'k',
+		'l',
+	]);
 });
 
 test.run();

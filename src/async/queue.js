@@ -45,7 +45,7 @@ export default function queue(max = 4) {
 				pending -= 1;
 				dequeue();
 			});
-		} catch(err) {
+		} catch (err) {
 			reject(err);
 			pending -= 1;
 			dequeue();
@@ -77,6 +77,6 @@ export default function queue(max = 4) {
 					fulfil_closed = fulfil;
 				}
 			});
-		}
+		},
 	};
 }

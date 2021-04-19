@@ -4,11 +4,7 @@
  * @param {number} height
  * @param {(ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement) => void} fn
  */
-export default function createSprite(
-	width,
-	height,
-	fn
-) {
+export default function createSprite(width, height, fn) {
 	const canvas = document.createElement('canvas');
 	canvas.width = width;
 	canvas.height = height;
