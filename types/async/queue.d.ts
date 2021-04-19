@@ -17,8 +17,8 @@
  */
 export default function queue(max?: number): {
     /** @param {() => Promise<any>} fn */
-    add(fn: () => Promise<any>): any;
-    close(): any;
+    add(fn: () => Promise<any>): Promise<any>;
+    close(): Promise<any>;
 };
 export type Deferred = {
     fulfil: (value?: any) => void;

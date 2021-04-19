@@ -4,7 +4,7 @@
         "checkJs": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
-        "lib": ["es5", "es6", "dom"],
+        "lib": ["dom"],
         "declaration": true,
         "emitDeclarationOnly": true,
         "outDir": "types"
