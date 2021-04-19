@@ -29,7 +29,7 @@
   "scripts": {
     "bundle": "esbuild --bundle src/index.js --format=cjs --outfile=dist/yootils.cjs",
     "types": "tsc",
-    "build": "npm run types && npm run bundle && agadoo && npm run format",
+    "build": "prettier -c src && npm run types && npm run bundle && agadoo",
     "format": "prettier -w src",
     "test": "uvu src \".\\.spec\\.js\"",
     "prepublishOnly": "npm test && npm run build"
