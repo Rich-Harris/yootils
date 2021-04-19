@@ -33,5 +33,6 @@
     "format": "prettier -w src",
     "test": "uvu src \".\\.spec\\.js\"",
     "prepublishOnly": "npm test && npm run build"
-  }
+  },
+  "license": "MIT"
 }
