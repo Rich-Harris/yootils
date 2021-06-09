@@ -13,6 +13,7 @@ export { default as createSprite } from './canvas/sprite.js';
 // number
 export { default as clamp } from './number/clamp.js';
 export { default as random } from './number/random.js';
+export { default as seedRandom } from './number/seedRandom.js';
 
 // scale
 export { default as linearScale } from './scale/linear.js';
