@@ -1,38 +1,38 @@
 {
-  "name": "yootils",
-  "description": "Stuff I often need",
-  "version": "0.2.0",
-  "type": "module",
-  "main": "dist/yootils.cjs",
-  "module": "src/index.js",
-  "exports": {
-    "import": "./src/index.js",
-    "require": "./dist/yootils.cjs"
-  },
-  "types": "types/index.d.ts",
-  "files": [
-    "src",
-    "dist",
-    "types"
-  ],
-  "devDependencies": {
-    "agadoo": "^2.0.0",
-    "esbuild": "^0.11.12",
-    "prettier": "^2.2.1",
-    "typescript": "^4.2.4",
-    "uvu": "^0.5.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Rich-Harris/yootils.git"
-  },
-  "scripts": {
-    "bundle": "esbuild --bundle src/index.js --format=cjs --outfile=dist/yootils.cjs",
-    "types": "tsc",
-    "build": "prettier -c src && npm run types && npm run bundle && agadoo",
-    "format": "prettier -w src",
-    "test": "uvu src \".\\.spec\\.js\"",
-    "prepublishOnly": "npm test && npm run build"
-  },
-  "license": "MIT"
+	"name": "yootils",
+	"description": "Stuff I often need",
+	"version": "0.2.1",
+	"type": "module",
+	"main": "dist/yootils.cjs",
+	"module": "src/index.js",
+	"exports": {
+		"import": "./src/index.js",
+		"require": "./dist/yootils.cjs"
+	},
+	"types": "types/index.d.ts",
+	"files": [
+		"src",
+		"dist",
+		"types"
+	],
+	"devDependencies": {
+		"agadoo": "^2.0.0",
+		"esbuild": "^0.11.12",
+		"prettier": "^2.2.1",
+		"typescript": "^4.2.4",
+		"uvu": "^0.5.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Rich-Harris/yootils.git"
+	},
+	"scripts": {
+		"bundle": "esbuild --bundle src/index.js --format=cjs --outfile=dist/yootils.cjs",
+		"types": "tsc",
+		"build": "prettier -c src && npm run types && npm run bundle && agadoo",
+		"format": "prettier -w src",
+		"test": "uvu src \".\\.spec\\.js\"",
+		"prepublishOnly": "npm test && npm run build"
+	},
+	"license": "MIT"
 }
