@@ -20,3 +20,4 @@ export { default as linearScale } from './scale/linear.js';
 
 // string
 export { default as commas } from './string/commas.js';
+export { default as padLeft } from './string/padLeft.js';
