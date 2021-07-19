@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.2.2
+
+- Expose package.json via `pkg.exports`
+
 ## 0.2.1
 
 - Add `seedRandom` function
