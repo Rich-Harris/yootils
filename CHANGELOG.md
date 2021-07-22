@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.3.0
+
+- Pass width and height back to `createSprite` callback
+
 ## 0.2.2
 
 - Expose package.json via `pkg.exports`
