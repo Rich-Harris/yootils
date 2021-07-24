@@ -1,7 +1,7 @@
 {
 	"name": "yootils",
 	"description": "Stuff I often need",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"type": "module",
 	"main": "dist/yootils.cjs",
 	"module": "src/index.js",

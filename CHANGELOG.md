@@ -1,5 +1,9 @@
 # yootils changelog
 
+## 0.3.1
+
+- Appease Safari
+
 ## 0.3.0
 
 - Pass width and height back to `createSprite` callback

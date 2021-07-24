@@ -51,14 +51,14 @@ const mask = width - 1;
 // that is in the range 0 <= x < (width ^ count).
 //
 class ARC4 {
-	i = 0;
-	j = 0;
-
-	/** @type {number[]} */
-	S = [];
-
 	/** @param {number[]} key */
 	constructor(key) {
+		this.i = 0;
+		this.j = 0;
+
+		/** @type {number[]} */
+		this.S = [];
+
 		// Set up S using the standard key scheduling algorithm.
 		for (let i = 0; i < width; i += 1) {
 			this.S[i] = i;
